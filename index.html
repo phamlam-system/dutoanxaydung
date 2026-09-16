@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Phạm Lâm – Người xây tổ ấm | Dự toán xây dựng</title>
+<meta name="description" content="Phạm Lâm – Người xây tổ ấm. Phần mềm dự toán và báo giá xây dựng. Liên hệ 078.778.1968.">
+
+<link rel="stylesheet" href="assets/base.css"><link rel="stylesheet" href="assets/ui.css"></head><body><a class="skip-link" href="#mainContent">Đi đến nội dung</a>
+
+<div class="wrap">
+  <div class="printhead" id="coverPrint">
+    <div class="cov-top">
+      <div class="cov-brand">PHẠM LÂM</div>
+      <div class="cov-sub">Người xây tổ ấm · Dự toán chi tiết xây dựng</div><div class="brand-contact">Liên hệ: 078.778.1968</div>
+    </div>
+    <div class="cov-title">BẢNG DỰ TOÁN &amp; BÁO GIÁ XÂY DỰNG</div>
+    <table class="cov-info">
+      <tr><td>Công trình</td><td id="cov_ten"></td></tr>
+      <tr><td>Địa chỉ</td><td id="cov_diachi"></td></tr>
+      <tr><td>Chủ đầu tư</td><td id="cov_cdt"></td></tr>
+      <tr><td>Quy mô</td><td id="cov_quymo"></td></tr>
+      <tr><td>Ngày lập</td><td id="cov_ngay"></td></tr>
+    </table>
+    <div class="cov-total">TỔNG GIÁ TRỊ DỰ TOÁN: <b id="cov_total"></b> đồng</div>
+    <div class="cov-words" id="cov_words"></div>
+    <div class="cov-dg">Đơn giá bình quân: <b id="cov_dg"></b> đ/m² sàn sử dụng · Diện tích sử dụng: <b id="cov_dt"></b> m²</div>
+    <div class="cov-note">Đơn giá tham khảo thị trường Huế · Định mức 1776 · Khối lượng dự toán, quyết toán theo thực tế thi công.</div>
+  </div>
+
+  <div class="app">
+    <aside class="sidebar no-print">
+      <div class="side-brand">Phạm Lâm<span>Người xây tổ ấm</span><small>078.778.1968</small></div>
+      <nav id="nav">
+        <div class="nav-grp">Nhập liệu</div>
+        <button class="nav on" data-mod="thongso" data-title="Thông số công trình"><span class="nav-icon" aria-hidden="true">01</span><span>Thông số công trình</span></button>
+        <button class="nav" data-mod="dongiacp" data-title="Đơn giá & chi phí"><span class="nav-icon" aria-hidden="true">02</span><span>Đơn giá & chi phí</span></button>
+        <button class="nav" data-mod="thietbi" data-title="Thiết bị & Hoàn thiện"><span class="nav-icon" aria-hidden="true">03</span><span>Thiết bị & Hoàn thiện</span></button>
+        <div class="nav-grp">Kết quả</div>
+        <button class="nav" data-mod="tongquan" data-title="Tổng quan"><span class="nav-icon" aria-hidden="true">04</span><span>Tổng quan</span></button>
+        <button class="nav" data-mod="tonghop" data-title="Bảng tổng hợp"><span class="nav-icon" aria-hidden="true">05</span><span>Bảng tổng hợp</span></button>
+        <button class="nav" data-mod="chitiet" data-title="Dự toán chi tiết"><span class="nav-icon" aria-hidden="true">06</span><span>Dự toán chi tiết</span></button>
+        <button class="nav" data-mod="vattu" data-title="Tổng hợp vật tư"><span class="nav-icon" aria-hidden="true">07</span><span>Tổng hợp vật tư</span></button>
+        <button class="nav" data-mod="hophi" data-title="Chi tiết hao phí"><span class="nav-icon" aria-hidden="true">08</span><span>Chi tiết hao phí</span></button>
+        <button class="nav" data-mod="giathanh" data-title="Giá thành & Lời/Lỗ"><span class="nav-icon" aria-hidden="true">09</span><span>Giá thành & Lời/Lỗ</span></button>
+        <button class="nav" data-mod="baonhanh" data-title="Báo giá nhanh (m²)"><span class="nav-icon" aria-hidden="true">10</span><span>Báo giá nhanh (m²)</span></button>
+        <div class="nav-grp">Hồ sơ</div>
+        <button class="nav" data-mod="xuat" data-title="In & Lưu dự án"><span class="nav-icon" aria-hidden="true">11</span><span>In & Lưu dự án</span></button>
+      </nav><select id="mobileNav" class="mobile-nav" aria-label="Chọn màn hình"><option value="thongso">Thông số công trình</option><option value="dongiacp">Đơn giá & chi phí</option><option value="thietbi">Thiết bị & Hoàn thiện</option><option value="tongquan">Tổng quan</option><option value="tonghop">Bảng tổng hợp</option><option value="chitiet">Dự toán chi tiết</option><option value="vattu">Tổng hợp vật tư</option><option value="hophi">Chi tiết hao phí</option><option value="giathanh">Giá thành & Lời/Lỗ</option><option value="baonhanh">Báo giá nhanh (m²)</option><option value="xuat">In & Lưu dự án</option></select>
+      <button class="theme-btn" id="themeBtn">◐ Giao diện</button>
+    </aside>
+
+    <main class="main" id="mainContent" tabindex="-1">
+      <div class="topbar no-print">
+        <div class="tb-title" id="modTitle">Thông số công trình</div>
+        <div class="workspace-bar"><span class="project-label" id="projectLabel"></span><span id="saveState" class="save-state"></span><button class="btn" id="quickSave">Lưu dự án</button><button class="btn ghost" id="quickPrint">In báo giá</button></div>
+        <div class="kpis">
+          <div class="kpi grand"><span>Tổng trọn gói (đ)</span><b id="r_total">—</b></div>
+          <div class="kpi"><span>Vật liệu thô (đ)</span><b id="r_vlt"></b></div>
+          <div class="kpi"><span>Nhân công (đ)</span><b id="r_nc"></b></div>
+          <div class="kpi"><span>VL hoàn thiện (đ)</span><b id="r_ht"></b></div>
+          <div class="kpi"><span>Đơn giá (đ/m²)</span><b id="r_permet"></b></div>
+        </div>
+      </div>
+
+      <div id="priceAudit" class="notice error no-print" hidden><span id="priceAuditText"></span> <button class="btn ghost" id="reviewMissingPrices">Rà soát <span id="missingPriceCount"></span> khoản thiếu giá</button><label class="audit-ack"><input type="checkbox" id="ackMissingPrices"> Tôi xác nhận đây là dự toán tham khảo và chấp nhận các khoản đang tính 0 đ</label></div>
+      <div id="validationSummary" class="notice error no-print" role="alert" hidden></div>
+      <div id="draftNotice" class="notice no-print" hidden>Bản nháp từ lần làm việc trước đang có trên máy.
+        <button class="btn ghost" id="restoreDraft">Khôi phục bản nháp</button><button class="btn ghost" id="dismissDraft">Để sau</button></div>
+      <!-- ===== MODULE: THÔNG SỐ ===== -->
+      <section class="mod no-print" id="mod_thongso">
+        <div class="card" id="illusCard">
+          <div class="hd"><h2>Hình minh họa</h2><div class="d">Tự cập nhật theo rộng, số tầng và loại mái khi bạn nhập bên dưới.</div></div>
+          <div class="bd"><div class="illus"><div id="svgbox"></div>
+            <div class="illcap"><span id="cap_dt"></span><span id="cap_tang"></span></div></div></div>
+        </div>
+        <div class="card">
+          <div class="hd"><h2>Thông số công trình</h2><div class="d">Nhập kích thước & lựa chọn — hệ thống bóc khối lượng kết cấu tức thì. Mở “Thông số kết cấu” để tinh chỉnh tiết diện, số cột, mật độ dầm… cho khớp bản vẽ.</div></div>
+          <div class="bd">
+            <div class="grp" style="margin-top:0">1 · Thông tin công trình</div>
+            <div class="pgrid">
+              <div class="field" style="grid-column:span 2"><label>Tên công trình</label><input id="p_ten" value="Nhà phố Anh A"></div>
+              <div class="field" style="grid-column:span 2"><label>Địa chỉ</label><input id="p_diachi" value="TP. Huế"></div>
+              <div class="field" style="grid-column:span 2"><label>Chủ đầu tư</label><input id="p_cdt" value="Ông/Bà …"></div>
+              <div class="field"><label>Ngày lập</label><input id="p_ngaylap"></div>
+            </div>
+            <div class="grp">2 · Thông tin ngôi nhà</div>
+<div class="choice-field">
+  <div class="choice-label" id="houseTypeLabel">Loại nhà</div>
+  <select id="p_nhanhom" hidden aria-hidden="true" tabindex="-1"><option value="capbon">Nhà cấp 4</option><option value="nhapho" selected>Nhà phố</option><option value="bietthupho">Biệt thự phố</option><option value="bietthuvuon">Biệt thự vườn</option></select>
+  <div class="house-chips no-print" data-choice-for="p_nhanhom" role="group" aria-labelledby="houseTypeLabel"><button type="button" data-value="capbon">Nhà cấp 4</button><button type="button" data-value="nhapho">Nhà phố</button><button type="button" data-value="bietthupho">Biệt thự phố</button><button type="button" data-value="bietthuvuon">Biệt thự vườn</button></div>
+</div>
+<p class="mini">Số tầng tính cả tầng trệt (trệt + 2 lầu = 3). Loại nhà là thông tin phân loại; kích thước và thông số kết cấu quyết định khối lượng.</p>
+<div class="choice-field shape-field">
+  <div class="choice-label" id="shapeLabel">Hình dạng mặt bằng</div>
+  <select id="p_loainha" hidden aria-hidden="true" tabindex="-1"><option value="chunhat" selected>Chữ nhật</option><option value="chuL">Chữ L</option><option value="giatkhoi">Giật khối</option><option value="phuctap">Phức tạp</option></select>
+  <div class="shape-choices no-print" data-choice-for="p_loainha" role="group" aria-labelledby="shapeLabel">
+    <button type="button" data-value="chunhat"><svg viewBox="0 0 96 64" aria-hidden="true"><rect x="13" y="11" width="70" height="42" rx="2"/></svg><span>Chữ nhật</span><small>Gọn, toàn khối</small></button>
+    <button type="button" data-value="chuL"><svg viewBox="0 0 96 64" aria-hidden="true"><path d="M13 11h31v22h39v20H13z"/></svg><span>Chữ L</span><small>Khuyết một góc</small></button>
+    <button type="button" data-value="giatkhoi"><svg viewBox="0 0 96 64" aria-hidden="true"><path d="M13 18h20V9h31v13h19v31H13z"/></svg><span>Giật khối</span><small>Nhiều nhịp lồi lõm</small></button>
+    <button type="button" data-value="phuctap"><svg viewBox="0 0 96 64" aria-hidden="true"><path d="M13 16h21V9h28v10h21v24H69v10H39v-7H13z"/></svg><span>Phức tạp</span><small>Nhiều cạnh, nhiều góc</small></button>
+  </div>
+</div>
+            <div class="pgrid house-grid">
+              <div class="field"><label>Dài bao (m)</label><input class="num" id="p_dai" value="18"></div>
+              <div class="field"><label>Rộng bao (m)</label><input class="num" id="p_rong" value="5"></div>
+              <div class="field"><label>Số tầng</label><input class="num" id="p_tang" value="3"></div>
+              <div class="field"><label>Cao tầng (m)</label><input class="num" id="p_cao" value="3.4"></div>
+              <div class="field"><label>Số phòng WC</label><input class="num" id="p_wc" value="4"></div>
+              <div class="field roof-field"><label>Loại mái</label><select id="p_maitype"><optgroup label="Mái hai lớp"><option value="bang_ton">Mái bằng BTCT + khung/xà gồ lợp tôn</option><option value="bang_ngoi">Mái bằng BTCT + khung kèo lợp ngói</option></optgroup><optgroup label="Mái một lớp"><option value="bang">Mái bằng BTCT</option><option value="ton" selected>Mái tôn trên khung/xà gồ</option><option value="ngoi">Mái ngói trên khung kèo</option><option value="thai">Mái Thái BTCT dán ngói</option></optgroup></select><span class="mini" id="roofHint">Mái tôn một lớp, không gồm sàn mái BTCT.</span></div>
+              <div class="field"><label>Diện tích mái (m²)</label><input class="num" id="p_maidt" value="90"></div>
+              <div class="field"><label>Mức hoàn thiện</label><select id="p_tier"><option value="0.8">Cơ bản — khoảng 4,8 triệu/m²</option><option value="1" selected>Tiêu chuẩn — khoảng 6,5 triệu/m²</option><option value="1.4">Cao cấp — từ 8,0 triệu/m²</option></select><div class="mini">Mức này điều chỉnh nhóm hoàn thiện; kết cấu và khối lượng vẫn tính theo thông số công trình.</div></div>
+            </div>
+            <div class="tier-guide no-print" id="tierGuide" aria-label="Tiêu chí các mức hoàn thiện">
+              <article data-tier-card="0.8"><div class="tier-head"><b>Cơ bản</b><span>4,8 triệu/m²</span></div><p>Đủ công năng, vật tư phổ thông, dễ thay thế; gạch, sơn, cửa và thiết bị vệ sinh ở nhóm kinh tế; ít trần và chi tiết trang trí.</p><small>Phần thô 3,4 · hoàn thiện tham khảo 1,4 triệu/m²</small></article>
+              <article data-tier-card="1"><div class="tier-head"><b>Tiêu chuẩn</b><span>6,5 triệu/m²</span></div><p>Vật tư trung cấp, độ bền và thẩm mỹ cân bằng; gạch, sơn, cửa, thiết bị vệ sinh đồng bộ; có trần và điểm nhấn ở khu vực chính.</p><small>Phần thô 3,8 · hoàn thiện tham khảo 2,7 triệu/m²</small></article>
+              <article data-tier-card="1.4"><div class="tier-head"><b>Cao cấp</b><span>từ 8,0 triệu/m²</span></div><p>Vật tư và thiết bị cao cấp, kích thước hoặc hoàn thiện đặc biệt; cửa, đá, thiết bị vệ sinh và chi tiết trang trí có yêu cầu cao.</p><small>Phần thô 4,3 · hoàn thiện tham khảo 3,7 triệu/m²</small></article>
+            </div>
+            <p class="mini tier-scope no-print">Chưa gồm đồ nội thất rời, thiết bị gia dụng, cảnh quan, hệ thống đặc biệt và vật tư đặt riêng. Giá là mốc tham khảo tại Huế; đơn giá thực tế trong “Đơn giá &amp; chi phí” luôn được ưu tiên khi lập dự toán chi tiết.</p>
+            <div class="grp">Tùy chọn thêm</div><div class="pgrid">
+<div class="field"><label for="p_lung">Tầng lửng</label><select id="p_lung"><option value="0">Không</option><option value="1">Có tầng lửng</option></select></div>
+<div class="field"><label for="p_lungdt">Diện tích lửng bổ sung (m²)</label><input class="num" id="p_lungdt" value="0"></div>
+<div class="field"><label for="p_santhuong">Sân thượng</label><select id="p_santhuong"><option value="0">Không</option><option value="1">Có sân thượng</option></select></div>
+<div class="field"><label for="p_santhuongdt">Diện tích sân thượng bổ sung (m²)</label><input class="num" id="p_santhuongdt" value="0"></div></div>
+<p class="mini">Chỉ nhập diện tích bổ sung chưa nằm trong mặt bằng các tầng bên dưới để tránh tính hai lần. Tổng diện tích dùng để ước tính gồm các phần bổ sung; cần đối chiếu khối lượng thực tế ở bảng chi tiết.</p>
+<div class="grp">Mặt bằng theo tầng <button class="btn ghost" id="rebuildFloors" style="font-size:11px;padding:4px 9px;margin-left:8px;text-transform:none;letter-spacing:0">↻ Dựng lại theo kích thước</button></div>
+            <div id="floorsBox"></div>
+            <div class="mini">Nhập diện tích sàn & ban công thực từng tầng (trệt/lầu/lửng/tum) — hệ thống bóc khối lượng thân, sàn, tường, hoàn thiện theo tổng diện tích thực thay vì hệ số.</div>
+            <details class="adv">
+              <summary>3 · ⚙ Thông số kết cấu — tiết diện, số cột, mật độ, móng</summary>
+              <div class="grp">Cột & Dầm</div>
+              <div class="pgrid">
+                <div class="field"><label>Số cột</label><input class="num" id="p_ncot" value="12"></div>
+                <div class="field"><label>Cột: rộng × sâu (m)</label><input id="p_cot" value="0.2 x 0.25"></div>
+                <div class="field"><label>Dầm: rộng × cao (m)</label><input id="p_dam" value="0.2 x 0.35"></div>
+                <div class="field"><label>Mật độ dầm (m/m² sàn)</label><input class="num" id="p_md" value="0.5"></div>
+              </div>
+              <div class="grp">Sàn & Tường</div>
+              <div class="pgrid">
+                <div class="field"><label>Dày sàn (m)</label><input class="num" id="p_ds" value="0.1"></div>
+                <div class="field"><label>Tường ngăn (m/m² sàn)</label><input class="num" id="p_mt" value="0.6"></div>
+                <div class="field"><label>Tỷ lệ trừ cửa (%)</label><input class="num" id="p_pcua" value="25"></div>
+                <div class="field"><label>Hệ số đà kiềng (× chu vi)</label><input class="num" id="p_kdk" value="1.3"></div>
+              </div>
+              <div class="grp">Cấu tạo tường xây</div>
+              <div class="pgrid">
+                <div class="field"><label>Gạch tường bao</label><select id="p_gach"><optgroup label="Gạch đất sét nung"><option value="8" selected>Tuynel 2 lỗ — 180×80×80 mm</option><option value="4">Gạch thẻ Tuynel — 180×80×40 mm</option><option value="dac200">Gạch đặc nhỏ — 200×95×60 mm</option><option value="dac220">Gạch đặc lớn — 220×105×60 mm</option><option value="lo4">Gạch 4 lỗ — 190×80×80 mm</option><option value="lo6nho">Gạch 6 lỗ nhỏ — 200×135×95 mm</option><option value="lo6lon">Gạch 6 lỗ lớn — 220×150×105 mm</option></optgroup><optgroup label="Gạch không nung"><option value="block100">Gạch block bê tông — 390×100×190 mm</option><option value="aac100">Gạch AAC nhẹ — 600×100×200 mm</option></optgroup></select><div class="mini" id="brickHint">Định mức tự đổi theo kích thước gạch.</div></div>
+                <div class="field"><label>Dày mỗi lớp tường bao (m)</label><input class="num" id="p_tuongbao_day" value="0.1"><div class="mini" id="wallOuterHint">2 lớp × 100 mm = tổng dày 200 mm.</div></div>
+                <div class="field"><label>Số lớp tường bao</label><select id="p_tuongbao_lop"><option value="1">1 lớp</option><option value="2" selected>2 lớp</option><option value="3">3 lớp</option></select></div>
+                <div class="field"><label>Gạch tường ngăn</label><select id="p_gachngan"><optgroup label="Gạch đất sét nung"><option value="8" selected>Tuynel 2 lỗ — 180×80×80 mm</option><option value="4">Gạch thẻ Tuynel — 180×80×40 mm</option><option value="dac200">Gạch đặc nhỏ — 200×95×60 mm</option><option value="dac220">Gạch đặc lớn — 220×105×60 mm</option><option value="lo4">Gạch 4 lỗ — 190×80×80 mm</option><option value="lo6nho">Gạch 6 lỗ nhỏ — 200×135×95 mm</option><option value="lo6lon">Gạch 6 lỗ lớn — 220×150×105 mm</option></optgroup><optgroup label="Gạch không nung"><option value="block100">Gạch block bê tông — 390×100×190 mm</option><option value="aac100">Gạch AAC nhẹ — 600×100×200 mm</option></optgroup></select><div class="mini" id="brickPartitionHint">Có thể chọn khác tường bao.</div></div>
+                <div class="field"><label>Dày mỗi lớp tường ngăn (m)</label><input class="num" id="p_tuongngan_day" value="0.1"><div class="mini" id="wallPartitionHint">1 lớp × 100 mm = tổng dày 100 mm.</div></div>
+                <div class="field"><label>Số lớp tường ngăn</label><select id="p_tuongngan_lop"><option value="1" selected>1 lớp</option><option value="2">2 lớp</option><option value="3">3 lớp</option></select></div>
+              </div>
+              <p class="mini">Khối lượng xây dùng tổng chiều dày = chiều dày mỗi lớp × số lớp. Tường bao hai lớp 100 mm và tường ngăn một lớp 100 mm là cấu hình mặc định.</p>
+              <div class="grp">Bê tông & nền</div>
+              <div class="pgrid">
+                <div class="field"><label>Mác bê tông</label><select id="p_macbt"><option value="200">M200</option><option value="250" selected>M250</option><option value="300">M300</option></select></div>
+                
+                <div class="field"><label>Loại đất nền</label><select id="p_datnen"><option value="1">Đất mềm</option><option value="1.1" selected>Trung bình</option><option value="1.25">Đất cứng</option></select></div>
+                <div class="field"><label>Dày cát nền (m)</label><input class="num" id="p_daycat" value="0.4"></div>
+                <div class="field"><label>Dày BT lót nền (m)</label><input class="num" id="p_daybtnen" value="0.1"></div>
+              </div>
+              <div class="grp">Cấu hình móng sơ bộ</div>
+              <div class="pgrid foundation-grid">
+                <div class="field"><label>Loại móng</label><select id="p_mongtype"><option value="don">Móng đơn</option><option value="bang1">Móng băng 1 phương</option><option value="bang2">Móng băng 2 phương</option><option value="be">Móng bè</option><option value="coc">Móng cọc</option></select></div>
+                <div class="field"><label>Sâu đào móng (m)</label><input class="num" id="p_mongsau" value="1.5"></div>
+                <div class="field foundation-param" data-foundation="don coc"><label>Số đài móng</label><input class="num" id="p_somong" value="12"></div>
+                <div class="field foundation-param" data-foundation="don coc"><label>Đài: dài × rộng (m)</label><input id="p_mongdr" value="1.2 x 1.2"></div>
+                <div class="field foundation-param" data-foundation="don coc"><label>Cao đài (m)</label><input class="num" id="p_mongcao" value="0.4"></div>
+                <div class="field foundation-param" data-foundation="bang1"><label>Hướng băng chính</label><select id="p_bang_huong"><option value="dai">Theo chiều dài nhà</option><option value="rong">Theo chiều rộng nhà</option></select></div>
+                <div class="field foundation-param" data-foundation="bang1 bang2"><label>Số trục chạy theo chiều dài</label><input class="num" id="p_bang_trucdai" value="3"></div>
+                <div class="field foundation-param" data-foundation="bang1 bang2"><label>Số trục chạy theo chiều rộng</label><input class="num" id="p_bang_trucrong" value="4"></div>
+                <div class="field foundation-param" data-foundation="bang1 bang2"><label>Bề rộng băng (m)</label><input class="num" id="p_bang_rong" value="0.8"></div>
+                <div class="field foundation-param" data-foundation="bang1 bang2"><label>Chiều cao băng (m)</label><input class="num" id="p_bang_cao" value="0.35"></div>
+                <div class="field foundation-param" data-foundation="be"><label>Móng bè vươn mỗi phía (m)</label><input class="num" id="p_be_vuon" value="0.3"></div>
+                <div class="field foundation-param" data-foundation="be"><label>Chiều dày móng bè (m)</label><input class="num" id="p_be_day" value="0.25"></div>
+                <div class="field foundation-param" data-foundation="coc"><label>Số lượng cọc</label><input class="num" id="p_coc_sl" value="24"></div>
+                <div class="field foundation-param" data-foundation="coc"><label>Chiều dài mỗi cọc (m)</label><input class="num" id="p_coc_dai" value="12"></div>
+                <div class="field foundation-param" data-foundation="coc"><label>Tiết diện cọc vuông (m)</label><input class="num" id="p_coc_canh" value="0.25"></div>
+              </div>
+              <div class="foundation-hint" id="foundationHint"></div>
+              <div class="grp">Tầng hầm</div>
+              <div class="pgrid">
+                <div class="field"><label>Có tầng hầm?</label><select id="p_ham"><option value="0" selected>Không</option><option value="1">Có</option></select></div>
+                <div class="field"><label>Diện tích hầm (m²)</label><input class="num" id="p_hamdt" value="0"></div>
+                <div class="field"><label>Cao tường hầm (m)</label><input class="num" id="p_hamcao" value="3"></div>
+              </div>
+              <div class="mini">Các thông số mặc định dùng để ước tính. Đối chiếu tiết diện và khối lượng với bản vẽ thiết kế trước khi chốt báo giá.</div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== MODULE: ĐƠN GIÁ & CHI PHÍ ===== -->
+      <section class="mod no-print" id="mod_dongiacp" hidden>
+        <div class="card market-card" id="marketCatalogCard">
+          <div class="hd"><h2>Bộ vật liệu & thiết bị theo phân khúc</h2><div class="d">Chọn nhanh một cấu hình tổng, sau đó thay riêng từng nhóm theo thương hiệu và yêu cầu thực tế.</div></div>
+          <div class="bd">
+            <div class="market-toolbar">
+              <div class="field"><label for="p_market_segment">Phân khúc tổng</label><select id="p_market_segment"><option value="basic">Căn bản — ưu tiên ngân sách</option><option value="standard" selected>Tiêu chuẩn — cân bằng chi phí và độ bền</option><option value="premium">Cao cấp — ưu tiên thương hiệu và tiện nghi</option></select></div>
+              <button class="btn primary" id="applyMarketSegment" type="button">Áp dụng bộ phân khúc</button>
+            </div>
+            <div class="market-grid" id="marketSelectors"></div>
+            <div class="market-result" id="marketCatalogSummary" role="status"></div>
+            <details class="market-sources"><summary>Nguồn khảo sát và nguyên tắc áp dụng</summary><div id="marketSourceList"></div></details>
+          </div>
+        </div>
+        <div class="card unit-price-card">
+          <div class="hd"><h2>Đơn giá xây dựng theo m²</h2><div class="d">Tách phần thô, phần hoàn thiện và trọn gói theo cùng khối lượng, đơn giá và chi phí của dự toán hiện tại.</div></div>
+          <div class="bd">
+            <div class="tblwrap unit-price-wrap">
+              <table>
+                <thead><tr><th>Loại đơn giá</th><th class="num">Nhân công</th><th class="num">Vật liệu</th><th class="num">Chi phí khác</th><th class="num">Tổng đơn giá</th><th class="num">Giá trị</th></tr></thead>
+                <tbody id="unitPriceBody"></tbody>
+              </table>
+            </div>
+            <p class="mini unit-price-note" id="unitPriceNote"></p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="hd"><h2>Bảng đơn giá vật tư & nhân công</h2><div class="d">Đơn giá tham khảo kế thừa — cập nhật theo báo giá nhà cung cấp; các bảng dự toán sẽ tính lại.</div></div>
+          <div class="bd">
+            <div class="priceg" id="priceBox"></div>
+            <div class="field" style="margin-top:12px;max-width:220px"><label>Ngày cập nhật đơn giá</label><input id="p_ngaygia" value="09/2026"></div>
+          </div>
+        </div>
+        <div class="card" id="priceProfileCard">
+          <div class="hd"><h2>Hồ sơ nguồn và hiệu lực bộ giá</h2><div class="d">Thông tin được khóa cùng dự án để kết quả cũ không tự đổi theo bộ giá mới.</div></div>
+          <div class="bd"><div class="pgrid">
+            <div class="field"><label for="pg_name">Tên bộ giá</label><input id="pg_name"></div>
+            <div class="field"><label for="pg_type">Loại nguồn</label><select id="pg_type"><option value="internal">Nội bộ / tham khảo</option><option value="vendor">Báo giá nhà cung cấp</option><option value="official">Công bố cơ quan nhà nước</option><option value="contract">Giá hợp đồng</option></select></div>
+            <div class="field" style="grid-column:span 2"><label for="pg_source">Tên văn bản, nhà cung cấp hoặc nguồn</label><input id="pg_source"></div>
+            <div class="field"><label for="pg_locality">Địa bàn áp dụng</label><input id="pg_locality"></div>
+            <div class="field"><label for="pg_surveyed">Ngày/kỳ khảo sát</label><input id="pg_surveyed" placeholder="VD: 09/2026"></div>
+            <div class="field"><label for="pg_valid">Hiệu lực đến</label><input id="pg_valid" placeholder="Để trống nếu chưa xác định"></div>
+            <div class="field"><label for="pg_status">Trạng thái</label><select id="pg_status"><option value="reference">Tham khảo</option><option value="reviewed">Đã kiểm tra</option><option value="approved">Đã phê duyệt</option></select></div>
+            <div class="field"><label for="pg_reviewer">Người kiểm tra/phê duyệt</label><input id="pg_reviewer"></div>
+            <label class="check-field"><input type="checkbox" id="pg_vat"> Giá đã gồm VAT</label>
+            <label class="check-field"><input type="checkbox" id="pg_transport"> Giá đã gồm vận chuyển/bốc dỡ</label>
+            <div class="field" style="grid-column:1/-1"><label for="pg_notes">Quy cách, phạm vi và ghi chú</label><textarea id="pg_notes" rows="3"></textarea></div>
+          </div><p class="price-profile-status" id="priceProfileStatus" role="status"></p></div>
+        </div>        <div class="card">
+          <div class="hd"><h2>Chi phí chung, thuế, dự phòng & hạng mục khác</h2><div class="d">Cấu trúc giá thành theo % (để 0 nếu gộp trong đơn giá) và các hạng mục ngoài phần nhà.</div></div>
+          <div class="bd">
+            <div class="grp" style="margin-top:0">Cấu trúc giá thành (%)</div>
+            <div class="pgrid">
+              <div class="field"><label>Chi phí chung (%)</label><input class="num" id="p_cpchung" value="0"></div>
+              <div class="field"><label>Thu nhập chịu thuế trước (%)</label><input class="num" id="p_tnc" value="0"></div>
+              <div class="field"><label>VAT (%)</label><input class="num" id="p_vat" value="0"></div>
+              <div class="field"><label>Dự phòng (%)</label><input class="num" id="p_duphong" value="0"></div>
+            </div>
+            <div class="mini">Nhập tỷ lệ theo hồ sơ và điều kiện áp dụng của công trình; để 0 nếu khoản đó đã nằm trong đơn giá để tránh tính trùng.</div>
+            <div class="grp">Các hạng mục khác (cọc, sân, cổng, bể, tiểu cảnh…)</div>
+            <div id="khacBox"></div>
+            <button class="btn ghost" id="addKhac" style="margin-top:8px;font-size:12px;padding:6px 12px">+ Thêm hạng mục</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== MODULE: THIẾT BỊ & HOÀN THIỆN ===== -->
+      <section class="mod no-print" id="mod_thietbi" hidden>
+        <div class="card">
+          <div class="hd"><h2>Thiết bị & vật tư hoàn thiện</h2><div class="d">Nhập khối lượng thực tế và đơn giá báo giá. Mọi thay đổi được đồng bộ ngay vào dự toán chi tiết, bảng tổng hợp, giá thành và hồ sơ dự án.</div></div>
+          <div class="finish-summary" aria-label="Tóm tắt thiết bị và hoàn thiện">
+            <div class="tile"><div class="k">Giá trị hoàn thiện</div><div class="v" id="finishTotal">—</div><div class="u">đ</div></div>
+            <div class="tile"><div class="k">Khoản đã điều chỉnh</div><div class="v" id="finishEdited">0</div><div class="u">công việc</div></div>
+            <div class="tile"><div class="k">Khoản thiếu giá</div><div class="v" id="finishMissing">0</div><div class="u">cần rà soát</div></div>
+          </div>
+          <div class="table-tools">
+            <input id="finishSearch" type="search" placeholder="Tìm tên, mã công việc…" aria-label="Tìm thiết bị và vật tư hoàn thiện">
+            <select id="finishFilter" aria-label="Lọc thiết bị và hoàn thiện"><option value="all">Tất cả nhóm</option><option value="finish">Phần hoàn thiện</option><option value="mep">Điện & nước</option><option value="edited">Đã điều chỉnh</option><option value="unpriced">Thiếu đơn giá</option></select>
+            <span class="count" id="finishCount" aria-live="polite"></span>
+            <button class="btn ghost" id="resetTB" type="button">Khôi phục đề xuất</button>
+          </div>
+          <div class="tblwrap">
+            <table class="finish-table">
+              <thead><tr><th>TT</th><th>Công việc / thiết bị</th><th>ĐVT</th><th class="num">Khối lượng</th><th class="num">Đơn giá</th><th class="num">Thành tiền</th><th>Thao tác</th></tr></thead>
+              <tbody id="tbBody"></tbody><tfoot id="tbFoot"></tfoot>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== MODULE: TỔNG QUAN ===== -->
+      <section class="mod" id="mod_tongquan" hidden>
+        <div class="card quality-card no-print">
+          <div class="hd"><h2>Chất lượng và khả năng kiểm chứng</h2><div class="d">Đánh giá theo phương pháp tạo khối lượng và giá trị đang hoạt động.</div></div>
+          <div class="quality-grid" id="qualityGrid"></div>
+          <div class="bd"><div class="quality-meter"><span id="qualityMeter"></span></div><p id="qualityNote" class="mini"></p></div>
+        </div>
+        <div class="thg no-print">
+          <div class="tile t-tho"><span class="st"></span><div class="k">Vật liệu thô</div><div class="v" id="k_vlt">—</div><div class="u">đ</div></div>
+          <div class="tile t-nc"><span class="st"></span><div class="k">Nhân công</div><div class="v" id="k_nc">—</div><div class="u">đ</div></div>
+          <div class="tile t-ht"><span class="st"></span><div class="k">Vật liệu hoàn thiện</div><div class="v" id="k_ht">—</div><div class="u">đ</div></div>
+          <div class="tile t-tg"><span class="st"></span><div class="k">Tổng trọn gói</div><div class="v" id="k_tg">—</div><div class="u">đ · đã làm tròn</div></div>
+        </div>
+        <div class="hero no-print">
+          <div class="lab">Tổng dự toán trọn gói</div>
+          <div class="big" id="r_total2">—</div>
+          <div class="words" id="r_words"></div>
+          <div class="hstats">
+            <span>Phần thô: <b id="r_tho"></b> đ</span>
+            <span>Diện tích sử dụng: <b id="r_dtsd"></b> m²</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== MODULE: BẢNG TỔNG HỢP ===== -->
+      <section class="mod" id="mod_tonghop" hidden>
+        <div class="card" id="v_tonghop">
+          <div class="hd"><h2>Bảng tổng hợp dự toán</h2><div class="d">Chi phí theo từng phần công trình và tổng các khoản bổ sung.</div></div>
+          <div class="tblwrap"><table><thead><tr>
+            <th>Hạng mục</th><th class="num">Vật liệu thô (đ)</th><th class="num">Nhân công (đ)</th><th class="num">Vật liệu hoàn thiện (đ)</th><th class="num">Phần thô (đ)</th><th class="num">Trọn gói (đ)</th></tr></thead>
+            <tbody id="thBody"></tbody><tfoot id="thFoot"></tfoot></table></div>
+        </div>
+      </section>
+
+      <!-- ===== MODULE: DỰ TOÁN CHI TIẾT ===== -->
+      <section class="mod" id="mod_chitiet" hidden>
+        <div class="card">
+          <div class="hd"><h2>Bảng dự toán chi tiết</h2><div class="d">Nhãn <span class="pill auto">tự động</span> = bóc theo công thức kết cấu · <span class="pill edit">đã sửa</span> = bạn nhập tay. Bấm tên phần để thu gọn.</div></div>
+          <div class="table-tools no-print"><input id="workSearch" type="search" placeholder="Tìm tên công việc hoặc mã hiệu…" aria-label="Tìm công việc"><select id="workFilter" aria-label="Lọc công việc"><option value="all">Tất cả công việc</option><option value="edited">Đã sửa khối lượng</option><option value="nonzero">Có khối lượng</option><option value="unpriced">Chưa có giá</option></select><button class="btn ghost" id="clearSearch">Bỏ lọc</button><button class="btn ghost" id="expandAll">Mở các phần</button><button class="btn ghost" id="collapseAll">Thu các phần</button><span class="count" id="workCount" role="status"></span></div><div id="workEmpty" class="empty-state no-print" hidden>Không tìm thấy công việc phù hợp. Thử từ khóa khác hoặc bỏ bộ lọc.</div>
+          <div class="tblwrap"><table><thead><tr>
+            <th style="width:34px">TT</th><th>Mã hiệu / Công việc</th><th style="width:44px">ĐVT</th><th class="num" style="width:104px">Khối lượng</th>
+            <th class="num">ĐG VL thô (đ)</th><th class="num">ĐG NC (đ)</th><th class="num">ĐG VL HT (đ)</th><th class="num">Thành tiền (đ)</th></tr></thead>
+            <tbody id="ctBody"></tbody></table></div>
+        </div>
+      </section>
+
+      <!-- ===== MODULE: TỔNG HỢP VẬT TƯ ===== -->
+      <section class="mod" id="mod_vattu" hidden>
+        <div class="card">
+          <div class="hd"><h2>Bảng tổng hợp vật tư & nhân công</h2><div class="d">Bóc ngược từ định mức × khối lượng — dùng để đặt hàng & kiểm soát hao phí. (Vật liệu hoàn thiện tính đơn giá trọn gói nên không tách vật tư.)</div></div>
+          <div class="tblwrap"><table><thead><tr>
+            <th style="width:34px">TT</th><th>Vật tư / Nhân công</th><th style="width:60px">ĐVT</th><th class="num">Khối lượng</th><th class="num">Đơn giá (đ)</th><th class="num">Thành tiền (đ)</th></tr></thead>
+            <tbody id="vtBody"></tbody><tfoot id="vtFoot"></tfoot></table></div>
+        </div>
+      </section>
+
+      <!-- ===== MODULE: CHI TIẾT HAO PHÍ ===== -->
+      <section class="mod" id="mod_hophi" hidden>
+        <div class="card">
+          <div class="hd"><h2>Bảng chi tiết hao phí vật tư theo công việc</h2><div class="d">Khối lượng vật tư/nhân công của từng công việc = khối lượng công việc × định mức (1776). Dùng để kiểm soát hao phí tại công trường. (Chỉ gồm công việc bóc theo định mức; hoàn thiện tính trọn gói không tách.)</div></div>
+          <div class="tblwrap"><table><thead><tr>
+            <th style="width:34px">TT</th><th>Công việc / Vật tư · Nhân công</th><th style="width:56px">ĐVT</th><th class="num">Định mức</th><th class="num">KL công việc</th><th class="num">KL hao phí</th></tr></thead>
+            <tbody id="hophiBody"></tbody></table></div>
+        </div>
+      </section>
+
+      <!-- ===== MODULE: GIÁ THÀNH & LỜI/LỖ ===== -->
+      <section class="mod" id="mod_giathanh" hidden>
+        <div class="card">
+          <div class="hd"><h2>Cấu trúc giá thành & Phân tích lời/lỗ</h2><div class="d">Từ chi phí trực tiếp → chi phí chung → thu nhập chịu thuế → VAT → dự phòng. So giá ký hợp đồng với chi phí thực hiện để biết biên lợi nhuận.</div></div>
+          <div class="bd">
+            <div class="tblwrap"><table class="wf"><tbody id="wfBody"></tbody></table></div>
+            <div class="bench" id="benchBox"></div>
+            <div class="grp">Phân tích lời/lỗ</div>
+            <div class="pgrid">
+              <div class="field"><label>Giá ký hợp đồng (tổng, đ)</label><input class="num" id="p_giaban" placeholder="mặc định = tổng dự toán"></div>
+              <div class="field"><label>hoặc theo m² (đ/m²)</label><input class="num" id="p_giabanm2" placeholder="tùy chọn"></div>
+            </div>
+            <div class="lolgrid" id="lolBox"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== MODULE: BÁO GIÁ NHANH (m²) ===== -->
+      <section class="mod" id="mod_baonhanh" hidden>
+        <div class="card"><div class="hd"><h2>Báo giá nhanh theo công trình</h2><div class="d">Dùng chung kích thước, mặt bằng từng tầng, mái và mức hoàn thiện với dự toán chi tiết. Thay đổi ở đây cập nhật toàn hệ thống.</div></div>
+        <div class="bd"><div class="quick-layout"><div><div id="quickHouseInfo"></div><p class="mini">Thông tin lấy trực tiếp từ module Thông số công trình.</p><button type="button" class="btn ghost no-print" data-open-module="thongso">Chỉnh thông tin ngôi nhà</button></div><div id="quickIllustration" class="illus" aria-label="Minh họa công trình"></div></div>
+<div class="grp">Cơ sở báo giá</div><div class="pgrid">
+<div class="field"><label for="p_bgsource">Nguồn đơn giá</label><select id="p_bgsource"><option value="detail">Từ dự toán chi tiết (đồng bộ)</option><option value="tier">Giá m² tham khảo theo mức hoàn thiện</option></select></div>
+<div class="field"><label for="p_bggia">Đơn giá riêng (đ/m², tùy chọn)</label><input class="num" id="p_bggia" placeholder="Để trống để dùng nguồn đã chọn"></div>
+<div class="field"><label for="p_bgbien">Biên dao động (%)</label><input class="num" id="p_bgbien" value="7"></div></div>
+<p class="bench" id="quickSource"></p><div class="lolgrid" id="bgBox"></div><p id="quickRange"></p><p class="mini" id="quickSplit"></p><p class="mini" id="quickCompare"></p>
+<div class="grp">Diện tích quy đổi</div><div class="tblwrap"><table><thead><tr><th>Hạng mục</th><th class="num">Diện tích (m²)</th><th class="num">Hệ số</th><th class="num">DT quy đổi (m²)</th></tr></thead><tbody id="qdBody"></tbody><tfoot id="qdFoot"></tfoot></table></div>
+<p class="mini">Hệ số quy đổi kế thừa bộ dữ liệu hiện tại; biên dao động là khoảng tham khảo do người dùng chọn. Lưu dự án hoặc tải tệp JSON để giữ cả thiết lập báo giá nhanh.</p>
+</div></div></section>
+
+      <!-- ===== MODULE: IN & LƯU ===== -->
+      <section class="mod no-print" id="mod_xuat" hidden>
+        <div class="card">
+          <div class="hd"><h2>In / Xuất báo giá & Lưu dự án</h2><div class="d">Xuất báo giá PDF A4 có bìa và chữ ký. Lưu nhiều dự án theo tên (trên trình duyệt máy này).</div></div>
+          <div class="bd">
+            <div class="actions" style="margin:0 0 16px">
+              <button class="btn" id="printBtn">🖶 In / Xuất PDF báo giá</button>
+              <button class="btn ghost" id="resetBtn">↺ Khôi phục khối lượng tự động</button>
+            </div>
+            <div class="grp" style="margin-top:0">Lưu / Mở dự án</div>
+            <div class="actions" style="margin:0">
+              <select id="slotSel" style="width:auto;min-width:170px"><option value="">— Dự án đã lưu —</option></select>
+              <input id="slotName" placeholder="Tên dự án để lưu" style="width:auto;min-width:170px">
+              <button class="btn ghost" id="saveBtn">💾 Lưu</button>
+              <button class="btn ghost" id="loadBtn">📂 Mở</button>
+              <button class="btn ghost" id="delBtn">🗑 Xóa</button>
+              <button class="btn ghost" id="exportBtn">Tải tệp dự án</button>
+              <button class="btn ghost" id="importBtn">Mở tệp dự án</button>
+              <input type="file" id="importFile" accept=".json" hidden>
+            </div><div class="revision-tools"><div class="field"><label for="revisionNote">Ghi chú phiên bản</label><input id="revisionNote" placeholder="VD: Chốt phương án mái và đơn giá tháng 9"></div><div class="field"><label for="revisionSel">Lịch sử phiên bản</label><select id="revisionSel"><option value="">— Chưa có phiên bản —</option></select></div><button class="btn ghost" id="restoreRevision" type="button">Khôi phục phiên bản</button></div><p id="storageStatus" role="status" aria-live="polite"></p><div>
+              <p>Tệp dự án giữ thông số, khối lượng sửa tay và đơn giá. Tải tệp để sao lưu hoặc chuyển máy.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="signblock" id="signPrint">
+        <div class="sig"><div class="s-role">CHỦ ĐẦU TƯ</div><div class="s-note">(Ký, ghi rõ họ tên)</div></div>
+        <div class="sig"><div class="s-place" id="sign_place"></div><div class="s-role">NGƯỜI LẬP DỰ TOÁN</div><div class="s-note">(Ký, ghi rõ họ tên)</div><div class="s-name">PHẠM LÂM</div><div class="s-contact">Người xây tổ ấm · 078.778.1968</div></div>
+      </div>
+
+      <div class="no-print" style="padding:12px"><a href="#baonhanh" data-open-module="baonhanh">Báo giá nhanh</a> · <a href="HUONG-DAN.html">Hướng dẫn sử dụng</a></div><div class="foot"><b>Phạm Lâm – Người xây tổ ấm</b> · Liên hệ: <b>078.778.1968</b> · Kết cấu bóc theo công thức hình học · Định mức 1776, đơn giá tham khảo Huế 2026 · Chi phí quyết toán theo khối lượng thực tế &amp; thời điểm thi công.</div>
+    </main>
+  </div>
+</div>
+
+
+
+<dialog id="workPriceDialog" aria-labelledby="workPriceTitle"><h2 id="workPriceTitle"></h2><p id="workPriceUnit"></p><input id="workPriceCode" type="hidden"><div class="pgrid"><div class="field"><label for="workPrice_vl">Vật liệu thô (đ)</label><input id="workPrice_vl" inputmode="decimal"></div><div class="field"><label for="workPrice_nc">Nhân công (đ)</label><input id="workPrice_nc" inputmode="decimal"></div><div class="field"><label for="workPrice_ht">Vật liệu hoàn thiện (đ)</label><input id="workPrice_ht" inputmode="decimal"></div><div class="field" style="grid-column:1/-1"><label for="workPrice_source">Nguồn đơn giá riêng</label><input id="workPrice_source" placeholder="Báo giá, nhà cung cấp hoặc căn cứ"></div></div><p id="workPriceError" role="alert"></p><div class="actions"><button class="btn" id="workPriceApply">Áp dụng</button><button class="btn ghost" id="workPriceReset">Dùng lại định mức</button><button class="btn ghost" id="workPriceCancel">Hủy</button></div></dialog><div id="toast" role="status" aria-live="polite"></div>
+<script src="assets/cost-core.js"></script><script src="assets/work-prices.js"></script><script src="assets/data.js"></script><script src="assets/p0-core.js"></script><script src="assets/validation.js"></script><script src="assets/quick-quote.js"></script><script src="assets/finish-module.js"></script><script src="assets/unit-prices.js"></script><script src="assets/app.js"></script><script src="assets/workspace.js"></script><script src="assets/p0-ui.js"></script><script src="assets/p0-runtime.js"></script><script src="assets/market-catalog.js"></script>
+</body></html>
+
+
